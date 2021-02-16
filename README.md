@@ -52,7 +52,7 @@ err := conn.ExecTx(func(tx db.Transaction) error {
 })
 
 if err != nil {
-    fmt.Println("the transaction was aborted due to an error")
+    fmt.Println("the transaction was aborted due to an unretryable error")
 }
 
 fmt.Println("the transaction was committed successfully")
