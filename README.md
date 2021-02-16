@@ -19,21 +19,27 @@ conn, err := NewCRDBConnection("connection_uri")
 ```
 
 The returned connection instance supports the following methods exactly as `*sql.DB` would:
-- `Query(query string, args ...interface{}) (*sql.Rows, error)`
-- `QueryRow(query string, args ...interface{}) *sql.Row`
-- `Exec(query string, args ...interface{}) (sql.Result, error)`
+```go
+Query(query string, args ...interface{}) (*sql.Rows, error)
+QueryRow(query string, args ...interface{}) *sql.Row
+Exec(query string, args ...interface{}) (sql.Result, error)
+```
 
 ## Executing a Transaction in the Serializable Isolation Level
-In order to execute a transaction in the serializable isolation level we must call a special method called `ExecTx` which has the following signature:
-- `ExecTx(func(tx db.Transaction) error) error`
+In order to execute a transaction in the serializable isolation level we must call a special method, `ExecTx` which has the following signature:
+```go
+ExecTx(func(tx db.Transaction) error) error
+```
 
 Notice how its argument is a function with the signature, `func(tx db.Transaction) error`.
 This function receives an argument of type `db.Transaction` and returns an error.
 
 `db.Transaction` is an interface that implements the following methods exactly as `*sql.DB` would:
-- `Query(query string, args ...interface{}) (*sql.Rows, error)`
-- `QueryRow(query string, args ...interface{}) *sql.Row`
-- `Exec(query string, args ...interface{}) (sql.Result, error)`
+```go
+Query(query string, args ...interface{}) (*sql.Rows, error)
+QueryRow(query string, args ...interface{}) *sql.Row
+Exec(query string, args ...interface{}) (sql.Result, error)
+```
 
 All operations that should be part of the same transaction must happen inside this function.
 If an error is returned, the entire transaction is aborted and rolled back.
