@@ -32,7 +32,13 @@ func errCode(err error) string {
 	switch t := errorCause(err).(type) {
 	case *pq.Error:
 		return string(t.Code)
+	case errWithSQLState:
+		return t.SQLState()
 	default:
 		return ""
 	}
+}
+
+type errWithSQLState interface {
+	SQLState() string
 }
