@@ -1,6 +1,6 @@
 # DB - A Library for Executing SQL Transactions in the Serializable Isolation Level with Automatic Retry Handling
 
-This is a little helper library I wrote to extend a standard Go SQL connection to more robustly support transactions under the serializable isolation level. By robust support I mean transactions that automatically retry on retriable commit errors, which sometimes occur when multiple transactions attempt to commit at once under the serializable isolation level. Since these errors are transient and are usually resolved upon retry, automatic retry behaviour is a useful feature for some applications that would rather the database driver handle such errors.
+This is a little helper library I wrote to extend a standard Go SQL connection to more robustly support transactions under the serializable isolation level. By robust support I mean transactions that automatically retry on retriable commit errors, which sometimes occur when multiple transactions attempt to commit at the same time under the serializable isolation level. Since these errors are transient and are usually resolved upon retry, automatic retry behaviour is a useful feature for some applications that would rather the database driver handle such errors.
 
 Currently this library only supports PostgreSQL and CockroachDB.
 
