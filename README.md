@@ -24,7 +24,7 @@ The returned connection instance supports the following methods exactly as `*sql
 - `Exec(query string, args ...interface{}) (sql.Result, error)`
 
 ## Executing a Transaction in the Serializable Isolation Level
-In order to execute a transaction in the serializable isolation level we must call a special method called `ExecuteTx` which has the following signature:
+In order to execute a transaction in the serializable isolation level we must call a special method called `ExecTx` which has the following signature:
 - `ExecTx(func(tx db.Transaction) error) error`
 
 Notice how its argument is a function with the signature, `func(tx db.Transaction) error`.
